@@ -1,0 +1,7 @@
+# docs/skill/
+
+Reserved for the synced copy of the SI setup skill. Run `./scripts/refresh-docs.sh`
+after the initial clone (and again whenever the upstream changes) to populate
+this directory. The MCP's documentation tools read from here.
+
+Source of truth: https://github.com/isw-da/simba-intelligence-skill
