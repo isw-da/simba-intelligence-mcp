@@ -95,7 +95,7 @@ def authenticate(base_url: str = "", username: str = "", password: str = "") -> 
     """Exchange username and password for a bearer token, cached for the session.
 
     Pass an explicit `base_url` to redirect the MCP at a different SI instance
-    (e.g. `https://simba.logisymphony.com`). If username and password are
+    (e.g. `https://<si-host>`). If username and password are
     omitted, the values from `SI_USERNAME` and `SI_PASSWORD` are used.
     """
     client = _get_client()

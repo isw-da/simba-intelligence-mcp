@@ -115,7 +115,7 @@ Composer admin and embed (ten):
 
 - Python 3.10 or newer
 - [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (recommended) or any other Python package manager
-- A running SI deployment, either local (kind cluster, port-forwarded per the setup skill) or hosted (e.g. `https://simba.logisymphony.com/`)
+- A running SI deployment, either local (kind cluster, port-forwarded per the setup skill) or hosted (e.g. `https://<si-host>/`)
 - An SI API key, or a username and password the MCP can exchange for a bearer
 
 The documentation tools work without an SI connection. The API tools need at least `SI_BASE_URL` and one of `SI_API_KEY` or `SI_USERNAME` + `SI_PASSWORD`.
