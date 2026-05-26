@@ -1,10 +1,7 @@
 # NLQ accuracy: field notes for MCP consumers
 
 Hard-won notes from a competitive PoV on getting reliable answers when an MCP
-client (Claude etc.) consumes a Simba Intelligence deployment. Anonymised. The
-full modelling playbook lives in the sibling `isw-da/composer-mcp` repo
-(`NLQ_ACCURACY_PATTERNS.md`); this is the consumer-side summary plus the
-endpoint facts.
+client (Claude etc.) consumes a Simba Intelligence deployment. Anonymised.
 
 ## Core principle
 
