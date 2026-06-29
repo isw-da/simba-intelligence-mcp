@@ -24,7 +24,7 @@ Companion to the documentation-only
 
 ## Tools
 
-Fifty-two tools across ten groups.
+Fifty-six tools across ten groups.
 
 Documentation, SI (seven, skill content only, no SI required):
 
@@ -38,12 +38,31 @@ Documentation, SI (seven, skill content only, no SI required):
 | `get_universal_llm_guide` | Consolidated guide for non-Claude LLM clients |
 | `get_install_script(environment, os_type)` | Bundled install script content |
 
-Documentation, Composer (two):
+Documentation, SI product corpus (two):
 
 | Tool | Description |
 | --- | --- |
-| `search_composer_docs(query)` | Full-text search across the bundled Composer reference snippets |
-| `get_composer_api_reference(endpoint_path)` | Return the bundled reference entry for a Composer endpoint |
+| `search_si_mintlify(query, max_results)` | Search the SI Mintlify product docs (NLQ, LLM config, EDCs, RLS, product behaviour) |
+| `get_si_mintlify_corpus` | Return the full SI Mintlify corpus as a single text block |
+
+Documentation, Composer current (one):
+
+| Tool | Description |
+| --- | --- |
+| `search_composer_current_docs(query, version, max_results)` | Search Composer v25/v26 docs. `version` = 'v25', 'v26', or 'both' |
+
+Documentation, Composer OpenAPI (one):
+
+| Tool | Description |
+| --- | --- |
+| `get_composer_openapi_spec(path_filter)` | Canonical Composer OpenAPI spec (220 paths). Also covers SI Discovery (/discovery/api/*). Empty `path_filter` returns ENDPOINTS.md index |
+
+Documentation, Composer legacy (two):
+
+| Tool | Description |
+| --- | --- |
+| `search_composer_docs(query)` | Full-text search across legacy Composer reference snippets |
+| `get_composer_api_reference(endpoint_path)` | Legacy bundled reference entry for a Composer endpoint |
 
 Authentication (one):
 
@@ -136,7 +155,12 @@ pip install -e .
 ./scripts/refresh-docs.sh
 ```
 
-The `refresh-docs.sh` step pulls the SI setup skill (`isw-da/simba-intelligence-skill`) into `docs/skill/` so the documentation tools (`get_skill_overview`, `list_guides`, etc.) have content to serve. Re-run it whenever the upstream skill changes. The Composer reference snippets in `docs/composer/` ship with the repo and do not need a refresh step.
+`refresh-docs.sh` pulls from two upstream repos:
+
+- `isw-da/simba-intelligence-skill` into `docs/skill/` — setup guides, deployment walkthroughs, troubleshooting, install scripts.
+- `isw-da/logi-si-docs` into `docs/logi-si-docs/` — full SI Mintlify corpus, current Composer v25/v26 docs, and the canonical Composer OpenAPI spec (220 paths / 338 ops, also covering the SI Discovery backend).
+
+Re-run whenever either upstream changes. The legacy Composer snippets in `docs/composer/` ship with the repo and do not need a refresh step.
 
 ## Configure environment
 
@@ -248,8 +272,12 @@ simba-intelligence-mcp/
       si_query.py       Raw SQL execution + explain
       composer_admin.py Composer admin reads, embed tokens, generic call
   docs/
-    skill/              Mirror of isw-da/simba-intelligence-skill content
-    composer/           Composer v25 REST reference snippets
+    skill/              Mirror of isw-da/simba-intelligence-skill (setup guides)
+    logi-si-docs/       Mirror of isw-da/logi-si-docs (populated by refresh-docs.sh)
+      simba-intelligence/  SI Mintlify corpus (llms-full.txt + per-page .md)
+      logi-composer-current/v25|v26/  Current Composer docs
+      composer-api/     Composer OpenAPI spec + ENDPOINTS.md index
+    composer/           Legacy Composer reference snippets
   tests/                Smoke tests (see `tests/README.md`)
 ```
 

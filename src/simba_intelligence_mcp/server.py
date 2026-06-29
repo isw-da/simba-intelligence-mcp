@@ -324,18 +324,52 @@ def si_explain_query(source_id: str, sql: str) -> str:
     return _fmt(si_query.explain_query(_get_client(), source_id, sql))
 
 
-# --- Composer documentation -------------------------------------------------
+# --- SI Mintlify docs (from isw-da/logi-si-docs) ----------------------------
+
+
+@mcp.tool()
+def search_si_mintlify(query: str, max_results: int = 5) -> str:
+    """Search the SI Mintlify product docs (per-page markdown). Use for product behaviour questions."""
+    return docs_mod.search_si_mintlify(query, max_results)
+
+
+@mcp.tool()
+def get_si_mintlify_corpus() -> str:
+    """Return the full SI Mintlify corpus as a single text block (llms-full.txt)."""
+    return docs_mod.get_si_mintlify_corpus()
+
+
+# --- Current Composer docs (from isw-da/logi-si-docs) -----------------------
+
+
+@mcp.tool()
+def search_composer_current_docs(query: str, version: str = "both", max_results: int = 5) -> str:
+    """Search the current Composer v25/v26 docs. version='v25'|'v26'|'both'."""
+    return docs_mod.search_composer_current_docs(query, version, max_results)
+
+
+# --- Composer OpenAPI spec (from isw-da/logi-si-docs) -----------------------
+
+
+@mcp.tool()
+def get_composer_openapi_spec(path_filter: str = "") -> str:
+    """Return the canonical Composer OpenAPI spec (220 paths). Also covers SI Discovery (/discovery/api/*).
+    Pass path_filter to get only matching paths. Empty returns the ENDPOINTS.md index."""
+    return docs_mod.get_composer_openapi_spec(path_filter)
+
+
+# --- Composer documentation (legacy snippets) --------------------------------
 
 
 @mcp.tool()
 def search_composer_docs(query: str) -> str:
-    """Full-text search across the bundled Composer reference snippets."""
+    """Search legacy Composer reference snippets in docs/composer/. Prefer search_composer_current_docs for v25/v26."""
     return docs_mod.search_composer_docs(query)
 
 
 @mcp.tool()
 def get_composer_api_reference(endpoint_path: str) -> str:
-    """Return the bundled API reference entry for a Composer endpoint path."""
+    """Return the legacy bundled API reference entry for a Composer endpoint. Prefer get_composer_openapi_spec."""
     return docs_mod.get_composer_api_reference(endpoint_path)
 
 
