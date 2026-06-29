@@ -258,7 +258,7 @@ def search_si_mintlify(query: str, max_results: int = 5) -> str:
         )
     query_lower = query.lower()
     results: list[str] = []
-    for path in sorted(_SI_MINTLIFY_PAGES_DIR.glob("*.md")):
+    for path in sorted(_SI_MINTLIFY_PAGES_DIR.rglob("*.md")):
         content = path.read_text(encoding="utf-8")
         lines = content.split("\n")
         excerpts: list[str] = []
@@ -302,7 +302,7 @@ def search_composer_current_docs(query: str, version: str = "both", max_results:
         ver_dir = _COMPOSER_CURRENT_DIR / ver
         if not ver_dir.exists():
             continue
-        for path in sorted(ver_dir.glob("*.md")):
+        for path in sorted(ver_dir.rglob("*.md")):
             content = path.read_text(encoding="utf-8")
             lines = content.split("\n")
             excerpts: list[str] = []

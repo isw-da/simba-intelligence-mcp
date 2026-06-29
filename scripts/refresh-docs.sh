@@ -47,9 +47,9 @@ sync_logi_si_docs() {
     # Composer OpenAPI + endpoint index
     cp -R "$src/composer-api" "$LOGI_DEST/composer-api"
     echo "  docs/logi-si-docs/ done"
-    echo "    SI Mintlify: $(ls "$LOGI_DEST/simba-intelligence/pages" 2>/dev/null | wc -l | tr -d ' ') pages"
-    echo "    Composer v25: $(ls "$LOGI_DEST/logi-composer-current/v25" 2>/dev/null | wc -l | tr -d ' ') articles"
-    echo "    Composer v26: $(ls "$LOGI_DEST/logi-composer-current/v26" 2>/dev/null | wc -l | tr -d ' ') articles"
+    echo "    SI Mintlify: $(find "$LOGI_DEST/simba-intelligence/pages" -name '*.md' 2>/dev/null | wc -l | tr -d ' ') .md pages"
+    echo "    Composer v25: $(find "$LOGI_DEST/logi-composer-current/v25" -name '*.md' 2>/dev/null | wc -l | tr -d ' ') .md articles"
+    echo "    Composer v26: $(find "$LOGI_DEST/logi-composer-current/v26" -name '*.md' 2>/dev/null | wc -l | tr -d ' ') .md articles"
     echo "    OpenAPI paths: $(python3 -c "import json,sys; d=json.load(open('$LOGI_DEST/composer-api/composer-openapi.json')); print(len(d.get('paths',{})))" 2>/dev/null || echo '?')"
 }
 
